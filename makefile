@@ -1,7 +1,8 @@
-all: subsets
+all: order
 
-subsets: subsets.c
-    gcc -o subsets subsets.c -lm
+order: order.c
+	gcc -o order order.c -lm
 
 clean:
-    rm -f subsets
+	rm -f order
+
