@@ -1,0 +1,57 @@
+---
+title: "Algorithm Pseudocode"
+header-includes:
+  - \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+output: 
+  pdf_document
+---
+
+# Algorithm for Generating and Sorting Subsets
+
+We present the algorithm for generating and sorting all subsets of an \(n\)-set, ordered by size and lexicographically within sizes.
+
+```{=latex}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwInput{KwData}{Input}
+\SetKwInput{KwResult}{Output}
+\SetKwFunction{FMain}{GenerateAndSortSubsets}
+\SetKwFunction{FSub}{CompareSubsets}
+\SetKwProg{Fn}{Function}{:}{end}
+\KwData{An integer \(n\) representing the size of the set}
+\KwResult{A list of all subsets of the \(n\)-set \(\{1, 2, \ldots, n\}\), sorted by size and lexicographically}
+
+\Fn{\FMain{$n$}}{
+  all\_subsets $\leftarrow$ empty list\;
+  \For{$i \leftarrow 0$ \KwTo $2^n - 1$}{
+    subset $\leftarrow$ empty set\;
+    \For{$j \leftarrow 0$ \KwTo $n - 1$}{
+      \If{$i \mathbin{\&} (1 \ll j) \neq 0$}{
+        subset $\leftarrow$ subset $\cup$ \{$j + 1$\}\;
+      }
+    }
+    all\_subsets.append(subset)\;
+  }
+  sort all\_subsets by \FSub\;
+  \KwRet{all\_subsets}\;
+}
+
+\Fn{\FSub{subset\_a, subset\_b}}{
+  size\_a $\leftarrow$ size(subset\_a)\;
+  size\_b $\leftarrow$ size(subset\_b)\;
+  \uIf{size\_a $\neq$ size\_b}{
+    \KwRet{size\_a - size\_b}\;
+  }\Else{
+    \For{index $\leftarrow$ 0 \KwTo size\_a - 1}{
+      \If{subset\_a[index] $\neq$ subset\_b[index]}{
+        \KwRet{subset\_a[index] - subset\_b[index]}\;
+      }
+    }
+    \KwRet{0}\;
+  }
+}
+
+\caption{Algorithm for generating and sorting subsets of an \(n\)-set}
+\end{algorithm}
+```
