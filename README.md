@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This C program is designed to efficiently generate and display all possible subsets of an \(n\)-set, which is a set of the first \(n\) positive integers \(\{1, 2, \ldots, n\}\). The subsets are sorted first by their size (ascending order) and then lexicographically within subsets of the same size. This README guides you through the requirements, building, running, and understanding the program's output.
+This C program is designed to efficiently generate and display all possible subsets of an \(n\)-set, which is a set of the first \(n\) positive integers \(\{1, 2, ..., n\}\). The subsets are sorted first by their size (ascending order) and then lexicographically within subsets of the same size. This README guides you through the requirements, building, running, and understanding the program's output.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ This C program is designed to efficiently generate and display all possible subs
 
 1. **Installation of GCC**: If GCC is not already installed, you can install it using your distribution's package manager. For example, on Ubuntu, you can install GCC by running `sudo apt-get install gcc` in the terminal.
 
-2. **Downloading the Program**: Ensure that you have both the `order.c` source file and the `Makefile` in the same directory on your local machine.
+2. **Downloading the Program**: Ensure that you have both the `order.c` source file and the `Makefile` in the same directory on your local machine. You can pull from github by the following url: `https://github.com/NewTempestStu/104291-Combinatorics-Algorithm-PA1-Q1`
 
 ## Compilation
 
