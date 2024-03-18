@@ -1,4 +1,4 @@
-#include "colormath.h"
+#include "color.h"
 
 int factorial(int n) {
     int fact = 1;
@@ -6,3 +6,8 @@ int factorial(int n) {
         fact *= i;
     return fact;
 }
+
+typedef struct {
+    int value;
+    int color; // 0 or 1
+} PermElement;

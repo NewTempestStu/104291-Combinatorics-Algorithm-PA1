@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "colormath.h" // Include the header file for factorial
+#include "color.h" // Include the header file for factorial
 
 // Define a structure for a permutation element with color.
 typedef struct {

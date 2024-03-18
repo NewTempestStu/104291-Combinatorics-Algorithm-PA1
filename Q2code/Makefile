@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-I.
 
 # Object files
-OBJ = color.o colormath.o
+OBJ = color.o colormath.o rank.o unrank.o
 
 # Target executable name
 TARGET = colorprog
