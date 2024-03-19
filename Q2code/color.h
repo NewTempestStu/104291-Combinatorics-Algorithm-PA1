@@ -8,5 +8,6 @@ typedef struct {
 
 int factorial(int n);
 int rank2ColoredPermutation(PermElement* perm, int n);
+void unrank2ColoredPermutation(int rank, int n, PermElement *perm)
 
 #endif // COLOR_H
