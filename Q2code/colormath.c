@@ -6,9 +6,3 @@ int factorial(int n) {
         fact *= i;
     return fact;
 }
-
-// Define a structure for a permutation element with color.
-typedef struct {
-    int value; // The value of the permutation element.
-    int color; // The color of the element, 0 or 1.
-} PermElement;
