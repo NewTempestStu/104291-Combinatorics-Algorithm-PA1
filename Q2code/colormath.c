@@ -7,7 +7,8 @@ int factorial(int n) {
     return fact;
 }
 
+// Define a structure for a permutation element with color.
 typedef struct {
-    int value;
-    int color; // 0 or 1
+    int value; // The value of the permutation element.
+    int color; // The color of the element, 0 or 1.
 } PermElement;

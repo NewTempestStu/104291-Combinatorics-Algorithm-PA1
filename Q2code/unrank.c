@@ -37,9 +37,9 @@ void unrank2ColoredPermutation(int rank, int n, PermElement *perm) {
     free(elements);
 }
 
-int main() {
-    int n = 3; // Set size
-    int rank = 7; // Example rank
+
+int printUnrankedPermutation(int rank, int n) {
+
     PermElement *perm = malloc(n * sizeof(PermElement));
 
     unrank2ColoredPermutation(rank, n, perm);
@@ -51,5 +51,4 @@ int main() {
     printf("\n");
 
     free(perm);
-    return 0;
 }
