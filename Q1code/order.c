@@ -195,6 +195,7 @@ void printSubsets(int n) {
  * Main function. Prompts the user for the size of the n-set, then prints all subsets sorted by size and lexicographically.
  */
 int main() {
+    while(1){
     int n;
     int m;
     printf("This program generates all subsets of an n-set and prints them in lexicographical order.\n");
@@ -205,6 +206,7 @@ int main() {
     printf("2. Generate the rank of a given subsets\n");
     printf("3. Generate the unrank of a given rank\n");
     printf("4. Generate the successor of a given subset\n");
+    printf("5. Exit\n");
     scanf("%d", &m);
     if (m==1){
     printf("Enter the size of the set (n): ");
@@ -242,6 +244,14 @@ int main() {
     }
     printSuccessor(n, set);
     }
+    else if (m==5){
+    break;
+    }
+    else{
+    printf("Invalid input\n");
+    }
+    }
+
 
     
 
