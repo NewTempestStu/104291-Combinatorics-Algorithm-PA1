@@ -2,14 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-/**
- * Compares two subsets based on their lengths first and then lexicographically.
- * This function is used by qsort.
- *
- * @param a Pointer to the first subset.
- * @param b Pointer to the second subset.
- * @return Negative if a < b, positive if a > b, zero if equal.
- */
 int compare(const void *a, const void *b) {
     const int *ia = *(const int **)a;
     const int *ib = *(const int **)b;
@@ -27,234 +19,201 @@ int compare(const void *a, const void *b) {
     return 0;
 }
 
-/**
- * Rank the given subset.
- * The rank is calculated by sorting the subset and then counting the number of subsets that are lexicographically
- * 
- * @param n The size of the n-set.
- * @param set The subset to find the rank of.
-*/
-void printRank(int n, int *set) {
-    unsigned int pow_set_size = pow(2, n);
-    int **subsets = malloc(pow_set_size * sizeof(int *));
+void generateSubsets(int n, int ***subsets, unsigned int *pow_set_size) {
+    *pow_set_size = pow(2, n);
+    *subsets = (int **)malloc(*pow_set_size * sizeof(int *));
     int index = 0;
 
-    for (int i = 0; i < pow_set_size; i++) {
-        subsets[index] = malloc((n + 1) * sizeof(int));
-        subsets[index][0] = 0; // First element will store the size of the subset
+    for (unsigned int i = 0; i < *pow_set_size; i++) {
+        (*subsets)[index] = (int *)malloc((n + 1) * sizeof(int));
+        (*subsets)[index][0] = 0; // First element stores the size of the subset
         for (int j = 0; j < n; j++) {
             if (i & (1 << j)) {
-                subsets[index][++subsets[index][0]] = set[j];
+                (*subsets)[index][++(*subsets)[index][0]] = j + 1;
             }
         }
         index++;
     }
 
-    qsort(subsets, pow_set_size, sizeof(int *), compare);
-    for (int i = 0; i < pow_set_size; i++) {
-        if (subsets[i][0] == n) {
-            printf("Rank of the given subset is %d\n", i);
-            break;
-        }
-    }
-    for (int i = 0; i < pow_set_size; i++) {
+    qsort(*subsets, *pow_set_size, sizeof(int *), compare);
+}
+
+void freeSubsets(int **subsets, unsigned int pow_set_size) {
+    for (unsigned int i = 0; i < pow_set_size; i++) {
         free(subsets[i]);
     }
     free(subsets);
 }
 
-/**
- * Unrank the given rank.
- * 
- * @param n The size of the n-set.
- * @param rank The rank of the subset to unrank.
-*/
-void printUnrank(int n, int rank) {
-    int *set = malloc(n * sizeof(int));
-    for (int i = 0; i < n; ++i) {
-        set[i] = i + 1; // Fill the set with consecutive numbers
-    }
-
-    unsigned int pow_set_size = pow(2, n);
-    int **subsets = malloc(pow_set_size * sizeof(int *));
-    int index = 0;
-
-    for (int i = 0; i < pow_set_size; i++) {
-        subsets[index] = malloc((n + 1) * sizeof(int));
-        subsets[index][0] = 0; // First element will store the size of the subset
-        for (int j = 0; j < n; j++) {
-            if (i & (1 << j)) {
-                subsets[index][++subsets[index][0]] = set[j];
-            }
-        }
-        index++;
-    }
-
-    qsort(subsets, pow_set_size, sizeof(int *), compare);
-    for (int i = 0; i < pow_set_size; i++) {
-        if (i == rank) {
-            printf("Unrank of the given rank is {");
-            for (int j = 1; j <= subsets[i][0]; j++) {
-                printf("%d", subsets[i][j]);
-                if (j < subsets[i][0]) printf(", ");
-            }
-            printf("}\n");
-            break;
-        }
-    }
-    for (int i = 0; i < pow_set_size; i++) {
-        free(subsets[i]);
-    }
-    free(subsets);
-    free(set);
-}
-
-/**
- * Find the successor of the given subset.
- * 
- * @param n The size of the n-set.
- * @param set The subset to find the successor of.
-*/
-void printSuccessor(int n, int *set) {
-    unsigned int pow_set_size = pow(2, n);
-    int **subsets = malloc(pow_set_size * sizeof(int *));
-    int index = 0;
-
-    for (int i = 0; i < pow_set_size; i++) {
-        subsets[index] = malloc((n + 1) * sizeof(int));
-        subsets[index][0] = 0; // First element will store the size of the subset
-        for (int j = 0; j < n; j++) {
-            if (i & (1 << j)) {
-                subsets[index][++subsets[index][0]] = set[j];
-            }
-        }
-        index++;
-    }
-
-    qsort(subsets, pow_set_size, sizeof(int *), compare);
-    for (int i = 0; i < pow_set_size; i++) {
-        if (subsets[i][0] == n) {
-            printf("Successor of the given subset is {");
-            for (int j = 1; j <= subsets[i][0]; j++) {
-                printf("%d", subsets[i][j]);
-                if (j < subsets[i][0]) printf(", ");
-            }
-            printf("}\n");
-            break;
-        }
-    }
-    for (int i = 0; i < pow_set_size; i++) {
-        free(subsets[i]);
-    }
-    free(subsets);
-}
-
-/**
- * Generates all subsets of the n-set, sorts them first by size then lexicographically, and prints them.
- *
- * @param n The size of the n-set.
- */
 void printSubsets(int n) {
-    int *set = malloc(n * sizeof(int));
-    for (int i = 0; i < n; ++i) {
-        set[i] = i + 1; // Fill the set with consecutive numbers
-    }
+    unsigned int pow_set_size;
+    int **subsets;
+    generateSubsets(n, &subsets, &pow_set_size);
 
-    unsigned int pow_set_size = pow(2, n);
-    int **subsets = malloc(pow_set_size * sizeof(int *));
-    int index = 0;
-
-    for (int i = 0; i < pow_set_size; i++) {
-        subsets[index] = malloc((n + 1) * sizeof(int));
-        subsets[index][0] = 0; // First element will store the size of the subset
-        for (int j = 0; j < n; j++) {
-            if (i & (1 << j)) {
-                subsets[index][++subsets[index][0]] = set[j];
-            }
-        }
-        index++;
-    }
-
-    qsort(subsets, pow_set_size, sizeof(int *), compare);
-
-    for (int i = 0; i < pow_set_size; i++) {
+    for (unsigned int i = 0; i < pow_set_size; i++) {
         printf("{");
         for (int j = 1; j <= subsets[i][0]; j++) {
             printf("%d", subsets[i][j]);
             if (j < subsets[i][0]) printf(", ");
         }
         printf("} ");
-        free(subsets[i]);
     }
     printf("\n");
-    free(subsets);
-    free(set);
+    freeSubsets(subsets, pow_set_size);
 }
 
-/**
- * Main function. Prompts the user for the size of the n-set, then prints all subsets sorted by size and lexicographically.
- */
-int main() {
-    while(1){
-    int n;
-    int m;
-    printf("This program generates all subsets of an n-set and prints them in lexicographical order.\n");
-    printf("A set of size n has 2^n subsets, so be careful with large n.\n");
-    printf("The subsets are printed in the format {a1, a2, ..., ak} {b1, b2, ..., bl} ... {z1, z2, ..., zm}\n");
-    printf("Please enter the selection of the functionality you want to use\n");
-    printf("1. Generate all subsets of an n-set and print them in lexicographical order\n");
-    printf("2. Generate the rank of a given subsets\n");
-    printf("3. Generate the unrank of a given rank\n");
-    printf("4. Generate the successor of a given subset\n");
-    printf("5. Exit\n");
-    scanf("%d", &m);
-    if (m==1){
-    printf("Enter the size of the set (n): ");
-    scanf("%d", &n);
-    printSubsets(n);
-    }
-    else if (m==2){
-    printf("Enter the size of the set (n): ");
-    scanf("%d", &n);
-    printf("Enter the subset to find the rank of: ");
-    int *set = malloc(n * sizeof(int));
-    for (int i = 0; i < n; ++i) {
-        scanf("%d", &set[i]);
-    }
-    unsigned int pow_set_size = pow(2, n);
-    int **subsets = malloc(pow_set_size * sizeof(int *));
-    int index = 0;
-    printRank(n, set);
-    }
-    else if (m==3){
-    printf("Enter the size of the set (n): ");
-    scanf("%d", &n);
-    printf("Enter the rank to find the subset of: ");
-    int rank;
-    scanf("%d", &rank);
-    printUnrank(n, rank);
-    }
-    else if (m==4){
-    printf("Enter the size of the set (n): ");
-    scanf("%d", &n);
-    printf("Enter the subset to find the successor of: ");
-    int *set = malloc(n * sizeof(int));
-    for (int i = 0; i < n; ++i) {
-        scanf("%d", &set[i]);
-    }
-    printSuccessor(n, set);
-    }
-    else if (m==5){
-    break;
-    }
-    else{
-    printf("Invalid input\n");
-    }
-    }
-
-
+// Function to find and print the rank of a given subset
+void printRank(int n, int *subset, int subsetSize) {
+    unsigned int pow_set_size;
+    int **subsets;
+    generateSubsets(n, &subsets, &pow_set_size);
     
+    int rank = -1; // Initialize rank as -1 to indicate not found
+    for (unsigned int i = 0; i < pow_set_size; i++) {
+        if (subsets[i][0] == subsetSize) {
+            int match = 1; // Assume it's a match
+            for (int j = 1; j <= subsetSize; j++) {
+                if (subsets[i][j] != subset[j-1]) {
+                    match = 0;
+                    break;
+                }
+            }
+            if (match) {
+                rank = i;
+                break;
+            }
+        }
+    }
+    
+    if (rank != -1) {
+        printf("Rank of the given subset is %d\n", rank);
+    } else {
+        printf("Given subset was not found.\n");
+    }
+    
+    freeSubsets(subsets, pow_set_size);
+}
+
+// Function to unrank or find a subset given its rank
+void printUnrank(int n, int rank) {
+    unsigned int pow_set_size;
+    int **subsets;
+    generateSubsets(n, &subsets, &pow_set_size);
+    
+    if (rank >= 0 && rank < pow_set_size) {
+        printf("Subset at rank %d is {", rank);
+        for (int j = 1; j <= subsets[rank][0]; j++) {
+            printf("%d", subsets[rank][j]);
+            if (j < subsets[rank][0]) printf(", ");
+        }
+        printf("}\n");
+    } else {
+        printf("Invalid rank.\n");
+    }
+    
+    freeSubsets(subsets, pow_set_size);
+}
 
 
+void printSuccessor(int n, int *subset, int subsetSize) {
+    unsigned int pow_set_size;
+    int **subsets;
+    generateSubsets(n, &subsets, &pow_set_size);
+    
+    int rank = -1;
+    // Find rank
+    for (unsigned int i = 0; i < pow_set_size; i++) {
+        if (subsets[i][0] == subsetSize) {
+            int match = 1;
+            for (int j = 1; j <= subsetSize; j++) {
+                if (subsets[i][j] != subset[j-1]) {
+                    match = 0;
+                    break;
+                }
+            }
+            if (match) {
+                rank = i;
+                break;
+            }
+        }
+    }
+    
+    // Print successor
+    if (rank != -1 && rank + 1 < pow_set_size) {
+        printf("Successor of the given subset is {");
+        for (int j = 1; j <= subsets[rank + 1][0]; j++) {
+            printf("%d", subsets[rank + 1][j]);
+            if (j < subsets[rank + 1][0]) printf(", ");
+        }
+        printf("}\n");
+    } else {
+        printf("Given subset does not have a successor.\n");
+    }
+    
+    freeSubsets(subsets, pow_set_size);
+}
+
+int main() {
+    int choice;
+    int n, subsetSize, rank;
+    int *subset;
+
+    while (1) {
+        printf("\nMenu:\n");
+        printf("1. Generate and print all subsets\n");
+        printf("2. Find and print the rank of a given subset\n");
+        printf("3. Find and print a subset given its rank\n");
+        printf("4. Find and print the successor of a given subset\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the size of the set (n): ");
+                scanf("%d", &n);
+                printSubsets(n);
+                break;
+            case 2:
+                printf("Enter the size of the set (n): ");
+                scanf("%d", &n);
+                printf("Enter the size of the subset: ");
+                scanf("%d", &subsetSize);
+                subset = (int *)malloc(subsetSize * sizeof(int));
+                printf("Enter the elements of the subset: ");
+                for (int i = 0; i < subsetSize; i++) {
+                    scanf("%d", &subset[i]);
+                }
+                printRank(n, subset, subsetSize);
+                free(subset);
+                break;
+            case 3:
+                printf("Enter the size of the set (n): ");
+                scanf("%d", &n);
+                printf("Enter the rank of the subset to find: ");
+                scanf("%d", &rank);
+                printUnrank(n, rank);
+                break;
+            case 4:
+                printf("Enter the size of the set (n): ");
+                scanf("%d", &n);
+                printf("Enter the size of the subset: ");
+                scanf("%d", &subsetSize);
+                subset = (int *)malloc(subsetSize * sizeof(int));
+                printf("Enter the elements of the subset: ");
+                for (int i = 0; i < subsetSize; i++) {
+                    scanf("%d", &subset[i]);
+                }
+                printSuccessor(n, subset, subsetSize);
+                free(subset);
+                break;
+            case 5:
+                printf("Exiting program.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please enter a number between 1 and 5.\n");
+        }
+    }
     return 0;
 }
+

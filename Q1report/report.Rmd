@@ -94,3 +94,70 @@ Sorting by size and then lexicographically is a common way to impose an order on
 ### Conclusion:
 
 The algorithm's elegance lies in its simplicity and the way it leverages binary numbers to relate to the concept of subsets. It provides a complete and ordered enumeration of subsets, which can be a powerful tool in various fields, such as combinatorics, probability, and computer science. The sorting criteria also offer a systematic way to list subsets that is consistent with how we typically understand and handle ordered lists.
+
+# Algorithms for Ranking, Unranking, and Finding the Successor of Subsets
+
+We extend the foundational operations on subsets of an \(n\)-set by introducing algorithms for ranking a given subset, unranking (finding a subset given its rank), and determining the successor of a subset.
+
+## Rank of a Subset
+
+The ranking process assigns a unique number to each subset, based on its order in the sorted list of all subsets.
+
+```{=latex}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwInput{KwData}{Input}
+\SetKwInput{KwResult}{Output}
+\SetKwFunction{FRank}{RankSubset}
+\SetKwProg{Fn}{Function}{:}{end}
+\KwData{A subset \(S\) of the \(n\)-set \(\{1, 2, \ldots, n\}\), and the total list of subsets \(L\)}
+\KwResult{The rank of subset \(S\) within \(L\)}
+\Fn{\FRank{$S$, $L$}}{
+  rank $\leftarrow$ position of \(S\) in \(L\)\;
+  \KwRet{rank}\;
+}
+\caption{Algorithm for determining the rank of a subset}
+\end{algorithm}
+```
+
+```{=latex}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwInput{KwData}{Input}
+\SetKwInput{KwResult}{Output}
+\SetKwFunction{FUnrank}{UnrankSubset}
+\SetKwProg{Fn}{Function}{:}{end}
+\KwData{A rank \(r\) and the total list of subsets \(L\)}
+\KwResult{The subset \(S\) corresponding to rank \(r\) in \(L\)}
+\Fn{\FUnrank{$r$, $L$}}{
+  subset $\leftarrow$ \(L[r]\)\;
+  \KwRet{subset}\;
+}
+\caption{Algorithm for unranking (finding a subset from its rank)}
+\end{algorithm}
+```
+
+```{=latex}
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\SetKwInput{KwData}{Input}
+\SetKwInput{KwResult}{Output}
+\SetKwFunction{FSuccessor}{FindSuccessor}
+\SetKwProg{Fn}{Function}{:}{end}
+\KwData{A subset \(S\) and the total list of subsets \(L\)}
+\KwResult{The immediate successor of \(S\) in \(L\), if it exists}
+\Fn{\FSuccessor{$S$, $L$}}{
+  rank $\leftarrow$ \FRank{$S$, $L$}\;
+  \uIf{rank < size of \(L\) - 1}{
+    successor $\leftarrow$ \(L[\text{rank} + 1]\)\;
+    \KwRet{successor}\;
+  }\Else{
+    \KwRet{"No successor exists"}\;
+  }
+}
+\caption{Algorithm for finding the successor of a subset}
+\end{algorithm}
+```
