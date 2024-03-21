@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+// Function to compare two subsets for qsort
 int compare(const void *a, const void *b) {
     const int *ia = *(const int **)a;
     const int *ib = *(const int **)b;
@@ -51,14 +52,13 @@ void printSubsets(int n) {
     generateSubsets(n, &subsets, &pow_set_size);
 
     for (unsigned int i = 0; i < pow_set_size; i++) {
-        printf("{");
+        printf("Rank %d: {", i);
         for (int j = 1; j <= subsets[i][0]; j++) {
             printf("%d", subsets[i][j]);
             if (j < subsets[i][0]) printf(", ");
         }
-        printf("} ");
+        printf("}\n");
     }
-    printf("\n");
     freeSubsets(subsets, pow_set_size);
 }
 
@@ -138,7 +138,6 @@ void printSuccessor(int n, int *subset, int subsetSize) {
         }
     }
     
-    // Print successor
     if (rank != -1 && rank + 1 < pow_set_size) {
         printf("Successor of the given subset is {");
         for (int j = 1; j <= subsets[rank + 1][0]; j++) {
@@ -160,7 +159,7 @@ int main() {
 
     while (1) {
         printf("\nMenu:\n");
-        printf("1. Generate and print all subsets\n");
+        printf("1. Generate and print all subsets/rank\n");
         printf("2. Find and print the rank of a given subset\n");
         printf("3. Find and print a subset given its rank\n");
         printf("4. Find and print the successor of a given subset\n");
