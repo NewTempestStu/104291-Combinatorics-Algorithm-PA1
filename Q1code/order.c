@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <stdio.h>                                                          // Include standard input/output library
+#include <stdlib.h>                                                         // Include standard library
+#include <math.h>                                                           // Include math library
 
 /**
  * Compare function for qsort to sort subsets by size and then lexicographically
@@ -8,7 +8,7 @@
  * @param b Pointer to a pointer to an integer array
  * @return -1 if a < b, 0 if a == b, 1 if a > b
 */
-int compare(const void *a, const void *b) {
+int compare(const void *a, const void *b) {                                 // Pointer to a pointer to an integer array
     const int *ia = *(const int **)a;                                       // cast to pointer to int
     const int *ib = *(const int **)b;                                       // cast to pointer to int
     int sizeA = ia[0];                                                      // First element stores the size of the subset
@@ -72,7 +72,7 @@ void freeSubsets(int **subsets, unsigned int pow_set_size) {                // P
  * @param n Number of elements in the set
  * @return void
 */
-void printSubsets(int n) {
+void printSubsets(int n) {                                                  // Number of elements in the set
     unsigned int pow_set_size;                                              // Size of the power set
     int **subsets;                                                          // Pointer to a pointer to an integer array
     generateSubsets(n, &subsets, &pow_set_size);                            // Generate the subsets
