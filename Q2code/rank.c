@@ -16,6 +16,11 @@ int permutationRank(PermElement* perm, int n) {
     return rank;
 }
 
+// Print the rank of the permutation
+void printRank(int size, PermElement* perm) {
+    printf("Rank of the permutation: %d\n", permutationRank(perm, size));
+}
+
 // Calculate color rank adjustment
 int colorRankAdjustment(PermElement* perm, int n) {
     int adjustment = 0;

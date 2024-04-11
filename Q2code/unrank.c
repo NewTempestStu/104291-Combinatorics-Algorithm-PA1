@@ -38,7 +38,7 @@ void unrank2ColoredPermutation(int rank, int n, PermElement *perm) {
 }
 
 
-int printUnrankedPermutation(int rank, int n) {
+void printUnrankedPermutation(int rank, int n) {
 
     PermElement *perm = malloc(n * sizeof(PermElement));
 
