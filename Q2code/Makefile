@@ -2,10 +2,10 @@ CC=gcc
 CFLAGS=-I.
 
 # Object files
-OBJ = color.o colormath.o rank.o unrank.o successor.o
+OBJ = color.o colormath.o rank.o unrank.o successor.o generate.o
 
 # Target executable name
-TARGET = colorprog
+TARGET = color
 
 # $@ is the target name, $^ are the prerequisite files
 $(TARGET): $(OBJ)

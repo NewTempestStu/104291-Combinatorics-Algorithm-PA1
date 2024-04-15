@@ -3,12 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Utility function to swap PermElement values
-void swap(PermElement *a, PermElement *b) {
-    PermElement temp = *a;
-    *a = *b;
-    *b = temp;
-}
+
 
 // Function to find the immediate successor of a given 2-colored permutation
 bool findSuccessor(PermElement *perm, int n) {

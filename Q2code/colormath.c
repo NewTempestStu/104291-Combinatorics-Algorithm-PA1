@@ -6,3 +6,10 @@ int factorial(int n) {
         fact *= i;
     return fact;
 }
+
+// Utility function to swap PermElement values
+void swap(PermElement *a, PermElement *b) {
+    PermElement temp = *a;
+    *a = *b;
+    *b = temp;
+}
