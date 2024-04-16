@@ -2,13 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * Structure for a binary search tree
+ * A node in a binary search tree has a value and pointers to its left and right children
+*/
 typedef struct tnode {
     int val;
     struct tnode *left;
     struct tnode *right;
 } tnode;
 
-// Function to create a new tree node
+/**
+ * Function to create a new node in a binary search tree
+ * @param val The value to store in the new node
+ * @return A pointer to the new node
+*/
 tnode* new_node(int val) {
     tnode* node = (tnode*)malloc(sizeof(tnode));
     if (node != NULL) {
@@ -18,8 +26,12 @@ tnode* new_node(int val) {
     }
     return node;
 }
-
-// Function to insert a new value into a BST
+/**
+ * Function to insert a new value into a BST
+ * @param node The root of the BST
+ * @param val The value to insert
+ * @return The root of the BST after insertion
+*/
 tnode* insert(tnode* node, int val) {
     // Return a new node if the tree is empty
     if (node == NULL) return new_node(val);
@@ -35,7 +47,10 @@ tnode* insert(tnode* node, int val) {
     return node;
 }
 
-// Function to free the memory of a BST
+/**
+ * Function to free the memory allocated for a binary search tree
+ * @param node The root of the tree to free
+*/
 void free_tree(tnode* node) {
     if (node == NULL) return;
     free_tree(node->left);
@@ -43,6 +58,16 @@ void free_tree(tnode* node) {
     free(node);
 }
 
+/**
+ * Function to print a binary search tree
+ * @param tree The root of the tree to print
+ * @param is_left Whether the current node is the left child of its parent
+ * @param offset The offset of the current node from the left edge of the tree
+ * @param depth The depth of the current node in the tree
+ * @param s The array to store the tree as a string
+ * @return The width of the current node in the tree
+ * @see https://stackoverflow.com/questions/801740
+*/
 int _print_t(tnode *tree, int is_left, int offset, int depth, char s[20][255])
 {
     char b[20];
@@ -98,6 +123,11 @@ int _print_t(tnode *tree, int is_left, int offset, int depth, char s[20][255])
     return left + width + right;
 }
 
+/**
+ * Function to print a binary search tree
+ * @param tree The root of the tree to print
+ * @return The width of the tree
+*/
 void print_t(tnode *tree)
 {
     char s[20][255];
@@ -110,7 +140,12 @@ void print_t(tnode *tree)
         printf("%s\n", s[i]);
 }
 
-// Function to print an array of integers
+/** 
+ * Function to print an array of integers
+ * @param arr The array to print
+ * @param size The size of the array
+ * @return void
+*/
 void print_array(int arr[], int size) {
     for (int i = 0; i < size; i++) {
         printf("%d ", arr[i]);
@@ -118,7 +153,14 @@ void print_array(int arr[], int size) {
     printf("\n");
 }
 
-// Function to generate all permutations of a set of keys
+/**
+ * Function to generate all permutations of a set of keys
+ * and print the BSTs that can be formed from each permutation
+ * @param array The array of keys
+ * @param start The start index of the array
+ * @param end The end index of the array
+ * @return void
+*/
 void permute_and_print(int *array, int start, int end) {
     if (start == end) {
         tnode* root = NULL;
@@ -146,6 +188,9 @@ void permute_and_print(int *array, int start, int end) {
     }
 }
 
+/**
+ * Main function
+*/
 int main() {
     int numberOfKeys;
     printf("Enter the number of keys: ");
