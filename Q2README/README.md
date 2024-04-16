@@ -29,7 +29,7 @@ python3 main.py
 
 Once the script is running, you will be presented with a menu of options:
 
-```
+```plaintext
 Menu:
 1. Generate all 2-colored permutations of length n and display their ranks
 2. Find the successor of a given 2-colored permutation
@@ -48,7 +48,7 @@ Menu:
 
 ## Example Usage
 
-```
+```plaintext
 Enter your choice: 1
 Enter the size of the permutation (n): 3
 Rank: 0 - (1,0) (2,0) (3,0)
