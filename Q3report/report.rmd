@@ -622,7 +622,7 @@ For the other keys user can try by their own since it's too long for markdown to
 
 ```
 > make clean
-del /F /Q order.exe
+del /F /Q main.exe
 ```
 
 Note: I have tested it on mac so it's fine for Linux to run it.

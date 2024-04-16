@@ -186,4 +186,4 @@ This project is open-sourced under the MIT License.
 
 ## Contact Information
 
-For inquiries or support, please reach out to `guan09236@NewTempestStu`.
+For inquiries or support, please reach out to `guan09236@gtiit.edu.cn`.
