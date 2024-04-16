@@ -25,7 +25,7 @@ This program comes with a Makefile for easy compilation. Here's how to use it:
 
 ## Running the Program
 
-After compiling the program with `make`, run the executable by typing `./order` on Unix-like systems or `order` on Windows in your terminal or command prompt. The program presents a menu with several options:
+After compiling the program with `make`, run the executable by typing `./order` on Unix-like systems or `order` on Windows in your terminal (if this fails just enter `./order` as the same in Linux) or command prompt. The program presents a menu with several options:
 
 1. **Generate and print all subsets/rank**: This option prompts you for the size of the set \(n\) and prints all subsets of the \(n\)-set along with their ranks.
 2. **Find and print the rank of a given subset**: For a subset you provide, this option will print its rank within the sorted list of subsets.

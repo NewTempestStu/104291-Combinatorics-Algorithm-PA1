@@ -29,7 +29,7 @@ Execute the compiled program by entering the following command:
 
 ```sh
 ./main // On Unix-like systems
-main  // On Windows
+main  // On Windows. If this fails just enter `./main` as the same in Linux
 ```
 
 The program will prompt you to input the number of keys and then each key individually.
