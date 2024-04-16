@@ -2,46 +2,59 @@
 
 ## Introduction
 
+This Python script allows users to generate, analyze, and manipulate 2-colored permutations of a set. It provides functionalities for generating all 2-colored permutations of a specified length, finding the successor of a given permutation, determining the rank of a permutation, and finding a permutation by its rank.
 
+## Features
 
-## Requirements
+- **Generate All 2-Colored Permutations**: Outputs all possible permutations of a set with each element colored in two possible colors (0 or 1) along with their ranks.
+- **Find Successor**: Given a permutation, finds and displays the next permutation in lexicographical order.
+- **Permutation Rank**: Calculates and returns the rank of a specified permutation.
+- **Find Permutation by Rank**: Retrieves and displays a permutation based on its rank in the order of all permutations.
 
-- **Operating System**: Linux or any Unix-like OS.
-- **Compiler**: GCC (GNU Compiler Collection) must be installed on your machine to compile the program.
+## Prerequisites
 
-## Setup Instructions
+- Python 3.6 or higher
 
-1. **Installation of GCC**: If GCC is not already installed, you can install it using your distribution's package manager. For example, on Ubuntu, you can install GCC by running `sudo apt-get install gcc` in the terminal.
+## Installation
 
-2. **Downloading the Program**: Ensure that you have both the `order.c` source file and the `Makefile` in the same directory on your local machine. You can pull from github by the following url: `https://github.com/NewTempestStu/104291-Combinatorics-Algorithm-PA1`
+No additional libraries are required beyond the Python Standard Library. Simply download the script to your local machine.
 
-## Compilation
+## How to Run
 
-This program comes with a Makefile for easy compilation. Here's how to use it:
+Navigate to the directory containing the script and run it using Python. For example:
 
-1. **Open a Terminal**: Navigate to the directory containing your program files.
-
-2. **Compile the Program**: Run the command `make` in your terminal. This command instructs the make utility to compile the program according to the rules defined in the `Makefile`. It should generate an executable named `color`.
-
-## Running the Program
-
-- **Execute the Program**: After compilation, you can run the program by typing `./color` in your terminal.
-- **Input**:
-- **Output**:
-
-## Example Usage and Output
-
+```bash
+python3 main.py
 ```
 
+Once the script is running, you will be presented with a menu of options:
+
+```
+Menu:
+1. Generate all 2-colored permutations of length n and display their ranks
+2. Find the successor of a given 2-colored permutation
+3. Find a permutation given its rank
+4. Find the rank of a given permutation
+5. Exit
 ```
 
-## Cleaning Up
+## Using the Script
 
-- **Remove Executable**: You can clean up the directory by running `make clean`. This command removes the compiled executable, keeping your directory tidy.
+- **Option 1**: Enter '1' to generate all 2-colored permutations. You will be prompted to enter the size of the permutation set (n). The script will then display all permutations along with their ranks.
+- **Option 2**: Enter '2' to find the successor of a permutation. You will need to provide the size of the permutation followed by the permutation itself in the format `(value,color)`.
+- **Option 3**: Enter '3' if you want to find a permutation by its rank. You will need to specify the size of the permutations and then the rank.
+- **Option 4**: Enter '4' to calculate the rank of a given permutation. Similar to option 2, you will provide the permutation details.
+- **Option 5**: Enter '5' to exit the program.
 
-## Understanding the Output
+## Example Usage
 
-
+```
+Enter your choice: 1
+Enter the size of the permutation (n): 3
+Rank: 0 - (1,0) (2,0) (3,0)
+Rank: 1 - (1,0) (2,0) (3,1)
+...
+```
 
 ## License
 
